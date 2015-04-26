@@ -10,7 +10,7 @@
 <ul class="posts-list">
 {% for post in posts %}
 <li>
-<span>{{ post.updated|date:"Y-m-d" }}</span><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a>
+<span>{{ post.updated|date:"Y-m-d" }}</span><a href="/post/{{ post.slug }}">{{ post.title }}</a>
 </li>
 {% endfor %}
 </ul>

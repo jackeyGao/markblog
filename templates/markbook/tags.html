@@ -9,13 +9,13 @@
         <section class="group-tags">
         <ul class="tag-box">
             {% for tag in tags %}
-            <li><a href="/blog/tag/{{ tag.name }}">{{ tag.name }}<span>{{ tag.number }}</span></a></li>
+            <li><a href="/tag/{{ tag.name }}">{{ tag.name }}<span>{{ tag.number }}</span></a></li>
             {% endfor %}
         </ul>
         </section>
         <hr>
         <blockquote> 
-            <small><a href="/blog/tags" title="Tags">{{ tags|length }}</a></small>
+            <small><a href="/tags" title="Tags">{{ tags|length }}</a></small>
         </blockquote>
     </div>
   </div>
