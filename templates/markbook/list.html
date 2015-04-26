@@ -1,0 +1,27 @@
+{% extends "markbook/page.html" %}
+{% block title %} {{ item_name }} {% endblock %}
+
+{% block page_content %}
+<div id="main" class="clearfix">
+<div class="content clearfix">
+
+<h3>在《{{ item_name }}》下的所有文章</h3>
+<section>
+<ul class="posts-list">
+{% for post in posts %}
+<li>
+<span>{{ post.updated|date:"Y-m-d" }}</span><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a>
+</li>
+{% endfor %}
+</ul>
+</section>
+<hr>
+<blockquote>
+    <small><a href="./{{ item_name }}" title="Posts">{{ posts|length }}</a></small>
+</blockquote>
+
+</div>
+</div>
+
+{% endblock %}
+

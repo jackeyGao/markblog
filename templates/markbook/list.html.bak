@@ -1,0 +1,34 @@
+{% extends "markbook/page.html" %}
+{% block title %} {{ item_name }} {% endblock %}
+
+{% block content %}
+<div id="container">
+<div id="main" class="clearfix">
+<div class="content clearfix">
+
+<h3>在《{{ item_name }}》下的所有文章</h3>
+<section>
+<ul class="posts-list">
+{% for post in posts %}
+<li>
+<span>{{ post.updated|date:"Y-m-d" }}</span><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a>
+</li>
+{% endfor %}
+</ul>
+</section>
+<hr>
+<blockquote>
+    <small><a href="./{{ item_name }}" title="Posts">{{ posts|length }}</a></small>
+</blockquote>
+
+</div>
+</div>
+<footer id="footer" class="top-box clearfix">
+&copy; 2013-2015 | <a href="/blog/post/about-blog" title="By JackeyGao">I'm JackeyGao</a> with
+<a href="#">MarkBlog</a>.
+<a href="javascript:scroll(0,0)" class="to-top">TOP</a>
+</footer>
+</div>
+
+{% endblock %}
+

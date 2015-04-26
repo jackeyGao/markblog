@@ -1,0 +1,39 @@
+{% extends "markbook/page.html" %}
+{% load markdown_deux_tags %}
+{% block title %}All Tags{% endblock %}
+
+{% block page_content %}
+  <div id="main" class="clearfix">
+    <div class="content clearfix">
+        <section class="archives">
+        {% for year, posts in archives %}
+        <h4 class="downarch">{{ year }} +</h4>
+        <ul class="posts-list">
+            {% for post in posts %}
+            <li class="archiveli">
+            <span>{{ post.created|date:"Y-m-d" }}</span><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+        </section>
+        <hr>
+        <blockquote> 
+            <small><a href="./archives" title="Archives">{{ posts|length }}</a></small>
+        </blockquote>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="//lib.sinaapp.com/js/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+      jQuery(document).ready(function($) {
+          $(document).ready(function() {
+              $(".archives ul.hidearch").hide();
+              $(".archives h4.downarch").click(function() {
+                  $(this).next().slideToggle('fast');
+                  return false;
+              });
+          });
+      })
+  </script>
+{% endblock %}

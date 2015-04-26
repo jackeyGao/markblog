@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>{% block title %}{% endblock %} | {{ blog_name }}</title>
+<meta name="author" content="{{ author }}">
+<meta name="description" content="{{ description }}" />
+<link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
+<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all">
+<link href="/static/css/solarized.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<img class='bg-image' src="/static/images/background.jpg" />
+<header id="header" class="clearfix header-fixed-top">
+<div class="nav">
+<h1><a href="/">{{ blog_name }}</a></h1>
+<ul>
+<li><a href="/blog/post/about-me">About</a></li>
+<!-- <li><a href="/blog/picky">Picky</a></li> -->
+<li><a href="/blog/post/links">Links</a></li>
+<li><a href="/blog/archives">Archives</a></li>
+<li><a href="/blog/tags">Tags</a></li>
+<li><a href="/admin/">Management</a></li>
+</ul>
+</div>
+</header>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>
+

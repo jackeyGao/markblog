@@ -1,0 +1,24 @@
+{% extends "markbook/page.html" %}
+{% load markdown_deux_tags %}
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block page_content %}
+  <div id="main" class="clearfix">
+    <div class="content clearfix">
+      <article>
+        <h2><a href="/blog/post/{{ post.slug }}">{{ post.title }}</a><small class="date-right">{{ post.created }}</small></h2>
+        {{ post.context_markup|safe }}
+        </article>
+        <div class="tag-list">Tags:
+          {% for tag in post.tags.all %}
+          <a href="/blog/tag/{{ tag.name }}">#{{ tag.name }}</a>
+          {% endfor %}
+          &#160;&#160; Post on <a href="/blog/category/{{ post.category }}">{{ post.category }}</a>
+        </div>
+        {% if post.is_reply %}
+          <div id="disqus_thread"></div>
+          {% include 'markbook/disqus.html' %}
+        {% endif %}
+        </div>
+  </div>
+{% endblock %}

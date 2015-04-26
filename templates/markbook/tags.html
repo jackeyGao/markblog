@@ -1,0 +1,22 @@
+{% extends "markbook/page.html" %}
+{% load markdown_deux_tags %}
+{% block title %}All Tags{% endblock %}
+
+{% block page_content %}
+  <div id="main" class="clearfix">
+    <div class="content clearfix">
+        <h3>All Tags</h3>
+        <section class="group-tags">
+        <ul class="tag-box">
+            {% for tag in tags %}
+            <li><a href="/blog/tag/{{ tag.name }}">{{ tag.name }}<span>{{ tag.number }}</span></a></li>
+            {% endfor %}
+        </ul>
+        </section>
+        <hr>
+        <blockquote> 
+            <small><a href="/blog/tags" title="Tags">{{ tags|length }}</a></small>
+        </blockquote>
+    </div>
+  </div>
+{% endblock %}
