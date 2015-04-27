@@ -2,6 +2,10 @@
 from django.db import models
 from markdown import markdown
 
+from django.template import Template
+from django.template import Context
+
+
 # Create your models here.
 
 
@@ -43,15 +47,14 @@ class Blog(models.Model):
         return self.title
 
     def context_markup(self):
-        return markdown(self.content, ["codehilite"])
+        full_content = self.get_full_content()
+        return markdown(full_content, ["codehilite"])
 
     def get_tag_list(self):
         return ','.join([ x.name for x in self.tags.all() ])
 
     def get_full_content(self):
-        if self.is_valid:
-            page_full_url = self.get_absolute_url()
-            return self.content + "\n\n" + blog_template % page_full_url + "\n\n" + '\n'.join(url_list)
-        else:
-            return self.content
+        template = Template(self.template.content)
+        context = Context({"BLOG_CONTENT": self.content})
+        return template.render(context)
 

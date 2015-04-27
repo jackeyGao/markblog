@@ -1,11 +1,12 @@
 {% extends "markbook/page.html" %}
 {% load markdown_deux_tags %}
-{% block title %}All Tags{% endblock %}
+{% block title %}所有标签{% endblock %}
 
 {% block page_content %}
   <div id="main" class="clearfix">
     <div class="content clearfix">
         <h3>All Tags</h3>
+
         <section class="group-tags">
         <ul class="tag-box">
             {% for tag in tags %}

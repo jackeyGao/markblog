@@ -8,7 +8,7 @@ from models import *
 
 class BaseMixin(object):
     def get_context_data(self, *args, **kwargs):
-        if 'object' in kwargs or 'item_name' in kwargs:
+        if 'object' in kwargs or 'item' in kwargs:
             context = super(BaseMixin, self).get_context_data(**kwargs)
         else:
             context = {}
@@ -44,34 +44,37 @@ class PostListView(BaseMixin, ListView):
     context_object_name = 'posts'
     template_name = "markbook/list.html"
 
+    def get_queryset(self):
+        self.name = self.kwargs.get('item_name')
+        item = self.item_class.objects.filter(name=self.name)
+        filter_dict = {}
+        filter_dict[self.filter_field] = item
+        filter_dict['is_valid'] = 1
+        queryset = Blog.objects.filter(**filter_dict).order_by("-updated")
+        print queryset
+        return queryset
+
     def get_context_data(self, **kwargs):
-        kwargs['item_name'] = self.kwargs.get('item_name')
+        item_name = self.kwargs.get("item_name")
+        item_obj = self.item_class.objects.get(name=item_name)
+        kwargs['item'] = item_obj
         return super(PostListView, self).get_context_data(**kwargs)
 
-class TagPostListView(PostListView):
 
-    def get_queryset(self):
-        self.name = self.kwargs.get('item_name')
-        tags = Tag.objects.filter(name=self.name)
-        queryset = Blog.objects.filter(tags__in=tags, 
-                is_valid=1).order_by("-updated")
-        return queryset
+class TagPostListView(PostListView):
+    item_class = Tag
+    filter_field = "tags__in"
 
 class CategoryPostListView(PostListView):
-
-    def get_queryset(self):
-        self.name = self.kwargs.get('item_name')
-        categorys = Category.objects.filter(name=self.name)
-        queryset = Blog.objects.filter(category__in=categorys, 
-                is_valid=1).order_by("-updated")
-        return queryset
+    item_class = Category
+    filter_field = "category__in"
 
 class TagsListView(BaseMixin, ListView):
     context_object_name = 'tags'
     template_name = "markbook/tags.html"
 
     def get_queryset(self, **kwargs):
-        posts = Blog.objects.all()
+        posts = Blog.objects.filter(is_valid=1)
         tags  = Tag.objects.all()
         queryset = []
         for tag in tags:
@@ -90,7 +93,7 @@ class ArchivesListView(BaseMixin, ListView):
 
     def get_queryset(self, **kwargs):
         queryset = {}
-        for post in Blog.objects.all():
+        for post in Blog.objects.filter(is_valid=1):
             year = post.created.year
             if not queryset.has_key(year):
                 queryset[year] = [post,]
@@ -108,6 +111,6 @@ class ArchivesListView(BaseMixin, ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        kwargs["posts"]  = Blog.objects.all()
+        kwargs["posts"]  = Blog.objects.filter(is_valid=1)
         kwargs["object"] = None
         return super(ArchivesListView, self).get_context_data(**kwargs)

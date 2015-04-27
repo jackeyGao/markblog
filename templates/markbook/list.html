@@ -1,11 +1,15 @@
 {% extends "markbook/page.html" %}
-{% block title %} {{ item_name }} {% endblock %}
+{% block title %} {{ item.name }} {% endblock %}
 
 {% block page_content %}
 <div id="main" class="clearfix">
 <div class="content clearfix">
 
-<h3>在《{{ item_name }}》下的所有文章</h3>
+<h3>在《{{ item.name }}》下的所有文章</h3>
+
+<pre>
+<b>{{ item.description }}</b>
+</pre>
 <section>
 <ul class="posts-list">
 {% for post in posts %}
