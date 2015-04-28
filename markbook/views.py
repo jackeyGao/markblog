@@ -81,6 +81,9 @@ class TagsListView(BaseMixin, ListView):
             post_number = [ post for post in posts if tag in post.tags.all() ]
             tag.number = len(post_number)
             queryset.append(tag)
+
+        queryset = sorted(queryset, key = lambda asd:asd.number, reverse = True)
+
         return queryset
 
     def get_context_data(self, **kwargs):
