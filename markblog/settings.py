@@ -29,7 +29,7 @@ SECRET_KEY = '$*jo^njpbxz_o0jzth)x(co47#sjnp*1-)5u2m$c%ws(ilgqkl'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,13 +82,26 @@ WSGI_APPLICATION = 'markblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
+sae = False
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'web.db'),
+if sae:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'app_markbookblog',
+            'USER': '2o1nlzw02n',
+            'PASSWORD': 'jjmji4w1wizl0mhx5iyl5lz10ljxm30i15x5kz30',
+            'HOST': 'w.rdc.sae.sina.com.cn',
+            'PORT': 3307,
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'web.db'),
+        }
+    }
 
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
@@ -114,39 +127,41 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static/static')
+STATIC_ROOT = os.path.join(BASE_DIR,'statics')
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-       'standard': {
-            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}  
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'debug.log'),
+if not sae:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+           'standard': {
+                'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(module)s:%(funcName)s] [%(levelname)s]- %(message)s'}  
         },
-        'markbook.file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'markbook.log'),
-            'formatter':'standard',
+        'handlers': {
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': os.path.join(BASE_DIR, 'debug.log'),
+            },
+            'markbook.file': {
+                'level': 'INFO',
+                'class': 'logging.FileHandler',
+                'filename': os.path.join(BASE_DIR, 'markbook.log'),
+                'formatter':'standard',
+            },
         },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+        'loggers': {
+            'django.request': {
+                'handlers': ['file'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
+            'markbook.views': {
+                'handlers': ['markbook.file'],
+                'level': 'DEBUG',
+                'propagate': True,
+            },
         },
-        'markbook.views': {
-            'handlers': ['markbook.file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
-
+    }
+else:
+    LOGGING = {}
