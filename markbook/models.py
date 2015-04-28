@@ -11,20 +11,20 @@ from django.template import Context
 
 
 class Tag(models.Model):
-    name = models.CharField(u'标签名称', max_length=50)
+    name = models.CharField(u'标签名称', max_length=50, unique=True)
     description = models.TextField(u"标签描述")
 
     def __unicode__(self):
         return self.name
 
 class BlogTemplate(models.Model):
-    name = models.CharField(u'模板名称',max_length=20)
+    name = models.CharField(u'模板名称',max_length=20, unique=True)
     content = models.TextField(u'模板构造')
     def __unicode__(self):
         return self.name 
 
 class Category(models.Model):
-    name = models.CharField(u'类目名称', max_length=20)
+    name = models.CharField(u'类目名称', max_length=20, unique=True)
     description = models.TextField(u"类目描述")
 
     def __unicode__(self):
@@ -32,8 +32,8 @@ class Category(models.Model):
 
 
 class Blog(models.Model):
-    title     = models.CharField(u'日志标题',max_length=50)
-    slug      = models.CharField(u'日志URL',max_length=45)
+    title     = models.CharField(u'日志标题',max_length=50, unique=True)
+    slug      = models.CharField(u'日志URL',max_length=45, unique=True)
     category  = models.ForeignKey(Category)
     tags      = models.ManyToManyField(Tag)
     template  = models.ForeignKey(BlogTemplate)
