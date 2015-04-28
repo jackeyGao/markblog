@@ -3,6 +3,8 @@ from django.contrib import admin
 #coding=UTF-8
 from models import *
 
+
+
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name','description')
     search_fields = ('name', 'description')
@@ -19,13 +21,12 @@ class BlogTemplateAdmin(admin.ModelAdmin):
 
 class BlogAdmin(admin.ModelAdmin):
     list_display  = ('title','created','updated', 'template', 'is_reply',
-            'is_valid','get_tag_list', 'slug')
+            'is_valid','get_tag_list', 'category')
     search_fields = ('title','content')
-    list_filter   = ('is_reply','is_valid','updated')
+    list_filter   = ('is_reply','is_valid','updated', 'tags', 'category')
     list_display_links = ('title',)
     ordering = ('-created',)
     date_hierarchy = 'updated' 
-
 
 
 # Register your models here.
