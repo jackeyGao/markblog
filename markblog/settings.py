@@ -32,7 +32,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -83,26 +82,34 @@ WSGI_APPLICATION = 'markblog.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-sae = False
+
+sae = os.environ.get("APP_NAME", "") 
 
 if sae:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'app_markbookblog',
-            'USER': '2o1nlzw02n',
-            'PASSWORD': 'jjmji4w1wizl0mhx5iyl5lz10ljxm30i15x5kz30',
-            'HOST': 'w.rdc.sae.sina.com.cn',
-            'PORT': 3307,
-        }
-    }
+    import sae.const
+    DB_NAME = sae.const.MYSQL_DB
+    DB_USER = sae.const.MYSQL_USER
+    DB_PASS = sae.const.MYSQL_PASS
+    DB_HOST = sae.const.MYSQL_HOST
+    DB_PORT = sae.const.MYSQL_PORT
+
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'web.db'),
-        }
+    DB_NAME = "web.db"
+    DB_USER = None
+    DB_PASS = None
+    DB_HOST = None
+    DB_PORT = None
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASS,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT
     }
+}
 
 STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'static'),
