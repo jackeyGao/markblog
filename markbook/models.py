@@ -1,10 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.db import models
 from markdown import markdown
-
-from django.template import Template
-from django.template import Context
-
+from markdown.extensions import codehilite
 
 # Create your models here.
 
@@ -49,12 +46,18 @@ class Blog(models.Model):
     def context_markup(self):
         full_content = self.get_full_content()
         return markdown(full_content, ["codehilite"])
+        #return markdown(full_content,  extensions=['codehilite(linenums=True)'])
 
     def get_tag_list(self):
         return ','.join([ x.name for x in self.tags.all() ])
 
+    def get_context(self):
+        return { 
+            "BLOG_CONTENT": self.content ,
+            }
+
     def get_full_content(self):
-        template = Template(self.template.content)
-        context = Context({"BLOG_CONTENT": self.content})
-        return template.render(context)
+        context = self.get_context()
+        full_content = self.template.content.format(**context)
+        return full_content
 

@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 from django.views.generic import ListView
 from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 from django.conf import settings
 from models import Blog, Tag, Category
 
@@ -113,6 +115,10 @@ class ArchivesListView(BaseMixin, ListView):
         kwargs["object"] = None
         return super(ArchivesListView, self).get_context_data(**kwargs)
 
+def BlogMarkDownSrcView(request, slug):
+    post = get_object_or_404(Blog, slug=slug)
+    return HttpResponse(post.get_full_content().encode('GB18030'), 
+            content_type='text/plain')
 
 def error404(request):
     return render_to_response('404.html', { 'page' : ''})
