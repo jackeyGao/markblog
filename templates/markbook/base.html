@@ -11,7 +11,11 @@
 </head>
 <body>
 <img class='bg-image' src="/static/markbook/images/background.jpg" />
+{% if not context.is_mobile %}
 <header id="header" class="clearfix header-fixed-top">
+{% else %}
+<header id="mobile-header" class="clearfix">
+{% endif %}
 <div class="nav">
     <h1><a href="/">{{ blog_name }}</a></h1>
 <ul>

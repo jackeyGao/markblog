@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
 from models import Blog, Tag, Category
+from function import is_mobile
 
 class BaseMixin(object):
     def get_context_data(self, *args, **kwargs):
@@ -12,13 +13,13 @@ class BaseMixin(object):
             context = super(BaseMixin, self).get_context_data(**kwargs)
         else:
             context = {}
-
         try:
+            context['is_mobile'] = is_mobile(self.request.META["HTTP_USER_AGENT"])
             context['blog_name'] = settings.CUSTOM_BLOG_NAME
             context['author'] = settings.CUSTOM_BLOG_AUTHOR
             context['description'] = settings.CUSTOM_BLOG_DESCRIPTION
         except Exception as e:
-            logger.exception(u'加载基本信息出错[%s]！', e)
+            pass
         return context
 
 
