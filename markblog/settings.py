@@ -87,6 +87,7 @@ sae = os.environ.get("APP_NAME", "")
 
 if sae:
     import sae.const
+    ENGINE  = "django.db.backends.mysql"
     DB_NAME = sae.const.MYSQL_DB
     DB_USER = sae.const.MYSQL_USER
     DB_PASS = sae.const.MYSQL_PASS
@@ -94,6 +95,7 @@ if sae:
     DB_PORT = sae.const.MYSQL_PORT
 
 else:
+    ENGINE  = "django.db.backends.sqlite3"
     DB_NAME = "web.db"
     DB_USER = None
     DB_PASS = None
@@ -102,7 +104,7 @@ else:
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': ENGINE,
         'NAME': DB_NAME,
         'USER': DB_USER,
         'PASSWORD': DB_PASS,
