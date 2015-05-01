@@ -24,7 +24,7 @@ class BaseMixin(object):
 
 
 class IndexListView(BaseMixin, ListView):
-    queryset = Blog.objects.filter(is_valid=1).order_by("-updated")[:6]
+    queryset = Blog.objects.filter(is_valid=1).order_by("-created")[:6]
     context_object_name = 'posts'
     template_name = "markbook/index.html"
 
@@ -51,7 +51,7 @@ class PostListView(BaseMixin, ListView):
         filter_dict = {}
         filter_dict[self.filter_field] = item
         filter_dict['is_valid'] = 1
-        queryset = Blog.objects.filter(**filter_dict).order_by("-updated")
+        queryset = Blog.objects.filter(**filter_dict).order_by("-created")
         return queryset
 
     def get_context_data(self, **kwargs):
