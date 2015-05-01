@@ -38,8 +38,8 @@ class Blog(models.Model):
     tags      = models.ManyToManyField(Tag)
     template  = models.ForeignKey(BlogTemplate)
     content   = models.TextField(u'日志内容')
-    is_reply  = models.BooleanField(u'是否评论')
-    is_valid  = models.BooleanField(u'是否有效')
+    is_reply  = models.BooleanField(u'是否评论', default=True)
+    is_valid  = models.BooleanField(u'是否有效', default=True)
     created   = models.DateTimeField(u'创建时间', auto_now_add=True)
     updated   = models.DateTimeField(u'更新时间', auto_now=True)
 
