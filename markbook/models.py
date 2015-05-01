@@ -1,11 +1,14 @@
 # -*- coding:utf-8 -*-
+import misaka as m
 from django.db import models
-from markdown import markdown
-from markdown.extensions import codehilite
+from renderer import BleepRenderer
 
 # Create your models here.
 
-
+# markdown bleeprenderer instance
+renderer = BleepRenderer()
+mdown = m.Markdown(renderer,
+    extensions=m.EXT_FENCED_CODE | m.EXT_NO_INTRA_EMPHASIS)
 
 class Tag(models.Model):
     name = models.CharField(u'标签名称', max_length=50, unique=True)
@@ -45,8 +48,7 @@ class Blog(models.Model):
 
     def context_markup(self):
         full_content = self.get_full_content()
-        return markdown(full_content, ["codehilite"])
-        #return markdown(full_content,  extensions=['codehilite(linenums=True)'])
+        return mdown.render(full_content)
 
     def get_tag_list(self):
         return ','.join([ x.name for x in self.tags.all() ])
