@@ -398,7 +398,8 @@ body {
 }
 
 .curtain ul span {
-	color: #ccc
+	color: #ccc;
+    font-family: Monaco,Menlo,"Monaco",monospace;
 }
 
 .curtain .footer {
