@@ -2,7 +2,6 @@
 import misaka as m
 from django.template import Template
 from django.template import Context
-from django.utils.encoding import force_text
 from django.db import models
 from renderer import BleepRenderer
 
@@ -56,8 +55,6 @@ class Blog(models.Model):
 
     def context_markup(self):
         full_content = self.get_full_content()
-        full_content = force_text(full_content, strings_only=True)
-        
         return mdown.render(full_content)
 
     def get_tag_list(self):
