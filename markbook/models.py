@@ -1,14 +1,22 @@
 # -*- coding:utf-8 -*-
 import misaka as m
+from django.template import Template
+from django.template import Context
+from django.utils.encoding import force_text
 from django.db import models
 from renderer import BleepRenderer
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 # Create your models here.
 
 # markdown bleeprenderer instance
 renderer = BleepRenderer()
 mdown = m.Markdown(renderer,
-    extensions=m.EXT_FENCED_CODE | m.EXT_NO_INTRA_EMPHASIS)
+    extensions=m.EXT_FENCED_CODE | m.EXT_NO_INTRA_EMPHASIS |\
+            m.EXT_TABLES)
 
 class Tag(models.Model):
     name = models.CharField(u'标签名称', max_length=50, unique=True)
@@ -48,18 +56,19 @@ class Blog(models.Model):
 
     def context_markup(self):
         full_content = self.get_full_content()
+        full_content = force_text(full_content, strings_only=True)
+        
         return mdown.render(full_content)
 
     def get_tag_list(self):
         return ','.join([ x.name for x in self.tags.all() ])
 
     def get_context(self):
-        return { 
-            "BLOG_CONTENT": self.content ,
-            }
+        return Context({"post": self}, autoescape=False)
 
     def get_full_content(self):
         context = self.get_context()
-        full_content = self.template.content.format(**context)
-        return full_content
+        template = Template(self.template.content)
+        full_content = template.render(context)
+        return full_content.__str__()
 
