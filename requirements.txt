@@ -1,8 +1,8 @@
 Django==1.8
-Markdown==2.6
 MarkupSafe==0.23
 Pygments==2.0.2
+django-grappelli==2.6.4
 django-markdown-deux==1.0.5
-markdown2==2.3.0
+misaka==1.0.2
 pytz==2015.2
 wsgiref==0.1.2
