@@ -14,7 +14,7 @@
 
 {% for post in posts %}
 <li>
-<span>{{ post.created | date:"d b" }}</span> &raquo;
+<span>{{ post.created | date:"d M" }}</span> &raquo;
 <a href="/post/{{ post.slug }}">{{ post.title }}</a>
 </li>
 {% endfor %}
