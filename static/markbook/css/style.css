@@ -159,7 +159,7 @@ abbr {
 	font-size: 90%;
 	text-transform: uppercase;
 	border-bottom: 1px dotted #ddd;
-	cursor: help
+	cursor: nerhelp
 }
 
 blockquote {
@@ -410,7 +410,7 @@ body {
 
 #container {
 	margin: 60px auto 0;
-	width: 680px
+	width: 800px
 }
 
 #main {
