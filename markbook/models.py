@@ -18,37 +18,37 @@ mdown = m.Markdown(renderer,
             m.EXT_TABLES)
 
 class Tag(models.Model):
-    name = models.CharField(u'标签名称', max_length=50, unique=True)
-    description = models.TextField(u"标签描述")
+    name = models.CharField(u'name', max_length=50, unique=True)
+    description = models.TextField(u"description")
 
     def __unicode__(self):
         return self.name
 
 class BlogTemplate(models.Model):
-    name = models.CharField(u'模板名称',max_length=20, unique=True)
-    content = models.TextField(u'模板构造')
+    name = models.CharField(u'name',max_length=20, unique=True)
+    content = models.TextField(u'content')
     def __unicode__(self):
         return self.name 
 
 class Category(models.Model):
-    name = models.CharField(u'类目名称', max_length=20, unique=True)
-    description = models.TextField(u"类目描述")
+    name = models.CharField(u'name', max_length=20, unique=True)
+    description = models.TextField(u"description")
 
     def __unicode__(self):
         return self.name
 
 
 class Blog(models.Model):
-    title     = models.CharField(u'日志标题',max_length=50, unique=True)
-    slug      = models.CharField(u'日志URL',max_length=45, unique=True)
+    title     = models.CharField(u'Title',max_length=50, unique=True)
+    slug      = models.CharField(u'Slug',max_length=45, unique=True)
     category  = models.ForeignKey(Category)
     tags      = models.ManyToManyField(Tag)
     template  = models.ForeignKey(BlogTemplate)
-    content   = models.TextField(u'日志内容')
-    is_reply  = models.BooleanField(u'是否评论', default=True)
-    is_valid  = models.BooleanField(u'是否有效', default=True)
-    created   = models.DateTimeField(u'创建时间', auto_now_add=True)
-    updated   = models.DateTimeField(u'更新时间', auto_now=True)
+    content   = models.TextField(u'Content')
+    is_reply  = models.BooleanField(u'Is_reply', default=True)
+    is_valid  = models.BooleanField(u'Is_valid', default=True)
+    created   = models.DateTimeField(u'Created', auto_now_add=True)
+    updated   = models.DateTimeField(u'Updated', auto_now=True)
 
     def __unicode__(self):
         return self.title
