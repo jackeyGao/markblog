@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^category/(?P<item_name>.*)$', CategoryPostListView.as_view(), name='category'),
     url(r'^tags', TagsListView.as_view(), name='tags'),
     url(r'^archives', ArchivesListView.as_view(), name='archives'),
-    url(r'^src/post/(?P<slug>.*)$', BlogMarkDownSrcView)
+    url(r'^src/post/(?P<slug>.*).md$', BlogMarkDownSrcView)
     #url(r'^blog/', include('markbook.urls')),
 
     #url(r'^admin/', include(admin.site.urls)),
