@@ -3,6 +3,7 @@ import misaka as m
 from django.template import Template
 from django.template import Context
 from django.db import models
+from django.contrib.sites.models import Site
 from renderer import BleepRenderer
 
 import sys
@@ -56,6 +57,13 @@ class Blog(models.Model):
     def context_markup(self):
         full_content = self.get_full_content()
         return mdown.render(full_content)
+
+    def get_absolute_url(self):
+        return 'post/' + self.slug
+
+    def get_full_url(self):
+        return 'http://%s/%s' % (Site.objects.get_current().domain, 
+                self.get_absolute_url())
 
     def get_tag_list(self):
         return ','.join([ x.name for x in self.tags.all() ])

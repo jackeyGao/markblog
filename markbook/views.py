@@ -4,6 +4,7 @@ from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.conf import settings
+from django.contrib.sites.models import Site
 from models import Blog, Tag, Category
 from function import is_mobile
 
@@ -18,6 +19,7 @@ class BaseMixin(object):
             context['blog_name'] = settings.CUSTOM_BLOG_NAME
             context['author'] = settings.CUSTOM_BLOG_AUTHOR
             context['description'] = settings.CUSTOM_BLOG_DESCRIPTION
+            context['domain'] = Site.objects.get_current().domain
         except Exception as e:
             pass
         return context
