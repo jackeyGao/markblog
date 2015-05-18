@@ -19,20 +19,20 @@ mdown = m.Markdown(renderer,
             m.EXT_TABLES)
 
 class Tag(models.Model):
-    name = models.CharField(u'name', max_length=50, unique=True)
+    name = models.CharField(u'name', max_length=50, unique=True, primary_key=True)
     description = models.TextField(u"description")
 
     def __unicode__(self):
         return self.name
 
 class BlogTemplate(models.Model):
-    name = models.CharField(u'name',max_length=20, unique=True)
+    name = models.CharField(u'name',max_length=20, unique=True, primary_key=True)
     content = models.TextField(u'content')
     def __unicode__(self):
         return self.name 
 
 class Category(models.Model):
-    name = models.CharField(u'name', max_length=20, unique=True)
+    name = models.CharField(u'name', max_length=20, unique=True, primary_key=True)
     description = models.TextField(u"description")
 
     def __unicode__(self):
