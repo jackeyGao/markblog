@@ -59,7 +59,7 @@ class Blog(models.Model):
         return mdown.render(full_content)
 
     def get_absolute_url(self):
-        return 'post/' + self.slug
+        return '/post/' + self.slug
 
     def get_full_url(self):
         return 'http://%s/%s' % (Site.objects.get_current().domain, 

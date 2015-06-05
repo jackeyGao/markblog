@@ -15,7 +15,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-CUSTOM_BLOG_NAME = "I'm JacekyGao"
+CUSTOM_BLOG_NAME = "JackeyGao"
 CUSTOM_BLOG_AUTHOR = "JacekyGao"
 CUSTOM_BLOG_DESCRIPTION = "JacekyGao"
 
