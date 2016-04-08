@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,13 +7,13 @@
 <meta name="author" content="{{ author }}">
 <meta name="description" content="{{ description }}" />
 <link rel="shortcut icon" type="image/ico" href="/static/favicon.ico">
-<link href="/static/markbook/css/style.css" rel="stylesheet" type="text/css" media="all">
-<link href="/static/markbook/css/solarized.css" rel="stylesheet" type="text/css">
+<link href='{% static "/markbook/css/style.css" %}' rel="stylesheet" type="text/css" media="all">
+<link href='{% static "/markbook/css/solarized.css" %}' rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="/static/markbook/home.js"></script>
+<script src='{% static "/markbook/home.js" %}'></script>
 </head>
 <body>
-<img class='bg-image' src="/static/markbook/images/background.jpg" />
+<img class='bg-image' src='{% static "/markbook/images/background.jpg"%}' />
 {% if not context.is_mobile %}
 <header id="header" class="clearfix header-fixed-top">
 {% else %}
