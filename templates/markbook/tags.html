@@ -9,8 +9,8 @@
 
         <section class="group-tags">
         <ul class="tag-box">
-            {% for tag in tags %}
-            <li><a href="/tag/{{ tag.name }}">{{ tag.name }}<span>{{ tag.number }}</span></a></li>
+            {% for tag, count in tags.items %}
+            <li><a href="/tag/{{ tag.name }}">{{ tag.name }}<span>{{ count }}</span></a></li>
             {% endfor %}
         </ul>
         </section>

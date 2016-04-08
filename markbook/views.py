@@ -1,4 +1,6 @@
 # -*- coding:utf-8 -*-
+from collections import Counter
+from collections import OrderedDict
 from django.views.generic import ListView
 from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
@@ -42,6 +44,7 @@ class PostDetailView(BaseMixin, DetailView):
     slug_field = "slug"
     context_object_name = "post"
 
+
 class PostListView(BaseMixin, ListView):
     model = Blog
     context_object_name = 'posts'
@@ -67,6 +70,7 @@ class TagPostListView(PostListView):
     item_class = Tag
     filter_field = "tags__in"
 
+
 class CategoryPostListView(PostListView):
     item_class = Category
     filter_field = "category__in"
@@ -77,20 +81,16 @@ class TagsListView(BaseMixin, ListView):
 
     def get_queryset(self, **kwargs):
         posts = Blog.objects.filter(is_valid=1)
-        tags  = Tag.objects.all()
-        queryset = []
-        for tag in tags:
-            post_number = [ post for post in posts if tag in post.tags.all() ]
-            tag.number = len(post_number)
-            queryset.append(tag)
-
-        queryset = sorted(queryset, key = lambda asd:asd.number, reverse = True)
-
-        return queryset
+        items = [ t for p in posts for t in p.tags.all() ]
+        return OrderedDict(
+                sorted(Counter(items).items(), 
+                key=lambda t: t[0])
+                )
 
     def get_context_data(self, **kwargs):
         kwargs["object"] = None
         return super(TagsListView, self).get_context_data(**kwargs)
+
 
 class ArchivesListView(BaseMixin, ListView):
     context_object_name = "archives"
@@ -120,10 +120,12 @@ class ArchivesListView(BaseMixin, ListView):
         kwargs["object"] = None
         return super(ArchivesListView, self).get_context_data(**kwargs)
 
+
 def BlogMarkDownSrcView(request, slug):
     post = get_object_or_404(Blog, slug=slug)
     return HttpResponse(post.get_full_content().encode('GB18030'), 
             content_type='text/plain')
+
 
 def error404(request):
     return render_to_response('404.html', { 'page' : ''})
