@@ -8,3 +8,12 @@ $(function() {
     curtain.toggle();
     curtain.slideDown(1000);
 });
+
+$(function() {
+    // archives 
+    $(".archives ul.hidearch").hide();
+    $(".archives h4.downarch").click(function() {
+        $(this).next().slideToggle('fast');
+        return false;
+    });
+});
