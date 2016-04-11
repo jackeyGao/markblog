@@ -135,6 +135,8 @@ USE_L10N = True
 
 USE_TZ = False
 
+LANGUAGE_CODE = 'zh_CN'
+
 
 STATICFILES_STORAGE = "qiniustorage.backends.QiniuStorage"
 DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
