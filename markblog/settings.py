@@ -144,7 +144,7 @@ QINIU_SECRET_KEY = 'l7fqBwgd-3M5ApcquLCFb-KKmLmNcIrlpQGJbBem'
 QINIU_BUCKET_NAME = 'markblog'
 #QINIU_BUCKET_DOMAIN = '7xlitg.com1.z0.glb.clouddn.com'
 QINIU_BUCKET_DOMAIN = '7xsuf4.com1.z0.glb.clouddn.com'
-QINIU_SECURE_URL = 'true'
+QINIU_SECURE_URL = 'false'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
