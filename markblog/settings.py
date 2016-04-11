@@ -37,7 +37,6 @@ SITE_ID=1
 # Application definition
 
 INSTALLED_APPS = (
-    'grappelli',
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,9 +141,9 @@ DEFAULT_FILE_STORAGE = 'qiniustorage.backends.QiniuStorage'
 
 QINIU_ACCESS_KEY = '-9GvtvlzlYsJThtrNMVocrhcsh3lmOTAuY6aXEBT'
 QINIU_SECRET_KEY = 'l7fqBwgd-3M5ApcquLCFb-KKmLmNcIrlpQGJbBem'
-QINIU_BUCKET_NAME = 'privacy'
+QINIU_BUCKET_NAME = 'markblog'
 #QINIU_BUCKET_DOMAIN = '7xlitg.com1.z0.glb.clouddn.com'
-QINIU_BUCKET_DOMAIN = 'dn-omem.qbox.me'
+QINIU_BUCKET_DOMAIN = '7xsuf4.com1.z0.glb.clouddn.com'
 QINIU_SECURE_URL = 'true'
 
 # Static files (CSS, JavaScript, Images)
