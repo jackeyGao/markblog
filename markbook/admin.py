@@ -1,9 +1,8 @@
+# -*- coding: utf-8 -*-
 from django.contrib import admin
-
-#coding=UTF-8
+from django.contrib.admin import AdminSite
+from django.utils.translation import ugettext_lazy
 from models import *
-
-
 
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name','description')
@@ -35,9 +34,9 @@ class BlogAdmin(admin.ModelAdmin):
         return obj.get_tag_list()
 
     viewpost.allow_tags = True
-    viewpost.short_description = u"View"
+    viewpost.short_description = u"查看"
 
-    get_tags.short_description = u"Tags"
+    get_tags.short_description = u"标签"
 
 
 # Register your models here.
