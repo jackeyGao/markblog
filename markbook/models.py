@@ -19,37 +19,53 @@ mdown = m.Markdown(renderer,
             m.EXT_TABLES)
 
 class Tag(models.Model):
-    name = models.CharField(u'name', max_length=50, unique=True)
-    description = models.TextField(u"description")
+    name = models.CharField(u'名称', max_length=50, unique=True)
+    description = models.TextField(u"描述")
+
+    class Meta:
+        verbose_name_plural, verbose_name = "标签", "标签"
 
     def __unicode__(self):
         return self.name
 
 class BlogTemplate(models.Model):
-    name = models.CharField(u'name',max_length=20, unique=True)
-    content = models.TextField(u'content')
+    name = models.CharField(u'名称',max_length=20, unique=True)
+    content = models.TextField(u'内容')
+
+    class Meta:
+        verbose_name_plural, verbose_name = "模版", "模版"
+
     def __unicode__(self):
         return self.name 
 
 class Category(models.Model):
-    name = models.CharField(u'name', max_length=20, unique=True)
-    description = models.TextField(u"description")
+    name = models.CharField(u'名称', max_length=20, unique=True)
+    description = models.TextField(u"描述")
+
+    class Meta:
+        verbose_name_plural, verbose_name = "分类", "分类"
 
     def __unicode__(self):
         return self.name
 
 
 class Blog(models.Model):
-    title     = models.CharField(u'Title',max_length=50, unique=True)
-    slug      = models.CharField(u'Slug',max_length=45, unique=True)
-    category  = models.ForeignKey(Category)
-    tags      = models.ManyToManyField(Tag)
-    template  = models.ForeignKey(BlogTemplate)
-    content   = models.TextField(u'Content')
-    is_reply  = models.BooleanField(u'Is_reply', default=True)
-    is_valid  = models.BooleanField(u'Is_valid', default=True)
-    created   = models.DateTimeField(u'Created', auto_now_add=True)
-    updated   = models.DateTimeField(u'Updated', auto_now=True)
+    title = models.CharField(u'标题',max_length=50, unique=True)
+    slug = models.CharField(u'标示',max_length=45, unique=True)
+    category = models.ForeignKey(Category,
+            verbose_name="分类")
+    tags = models.ManyToManyField(Tag,
+            verbose_name="标签")
+    template = models.ForeignKey(BlogTemplate, 
+            verbose_name="模版")
+    content = models.TextField(u'内容')
+    is_reply = models.BooleanField(u'是否回复', default=True)
+    is_valid = models.BooleanField(u'是否有效', default=True)
+    created = models.DateTimeField(u'创建时间', auto_now_add=True)
+    updated = models.DateTimeField(u'最后更新', auto_now=True)
+
+    class Meta:
+        verbose_name_plural, verbose_name = "日志", "日志"
 
     def __unicode__(self):
         return self.title
