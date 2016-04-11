@@ -253,7 +253,7 @@ p small {
 body {
 	background: center top no-repeat fixed #e6ebea;
 	word-wrap: break-word;
-	font-family: Quantico,"Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,"微软雅黑",sans-serif!important;
+	font-family: Courier,Quantico,"Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB",STHeiti,"微软雅黑",sans-serif!important;
 	color: #555
 }
 
@@ -314,7 +314,7 @@ body {
 }
 
 #header h1 a {
-	font-family: Quantico,sans-serif;
+	font-family: Courier,Quantico,sans-serif;
 	font-weight: 700;
 	color: #333
 }
